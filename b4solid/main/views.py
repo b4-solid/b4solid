@@ -4,4 +4,4 @@ from django.shortcuts import redirect, render
 def main(request):
     if request.session.get('user', None) == None:
         return redirect('authentication:login')
-    return render(request, 'home.html')
+    return render(request, 'main.html')
