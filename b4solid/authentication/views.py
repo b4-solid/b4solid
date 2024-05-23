@@ -13,7 +13,7 @@ def login(request):
         }
 
         result = requests.post(
-            url='http://127.0.0.1:8085/login',
+            url='http://aldenluth.fi:8085/login',
             data=json.dumps(body),
             headers={'Content-Type': 'application/json'}
         )
@@ -32,7 +32,7 @@ def register(request):
     context = {}
     if request.method == 'POST':
         result = requests.post(
-            url='http://127.0.0.1:8085/register',
+            url='http://aldenluth.fi:8085/register',
             data=json.dumps(request.POST),
             headers={'Content-Type': 'application/json'}
         )
