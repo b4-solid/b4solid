@@ -4,4 +4,9 @@ from django.shortcuts import redirect, render
 def main(request):
     if request.session.get('user', None) == None:
         return redirect('authentication:login')
-    return render(request, 'main.html')
+
+    context = {
+        'user': request.session.get('user'),
+        'admin': request.session.get('godmode') == 'true'
+    }
+    return render(request, 'main.html', context=context)

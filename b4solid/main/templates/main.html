@@ -2,5 +2,10 @@
 {% load static %}
 
 {% block content %}
-<div class="flex align-middle justify-center w-full text-9xl font-bold bg-black">yeah</div>
+<div class="flex items-center justify-center h-screen text-9xl font-bold">
+  Hi, {{ user }}
+  {% if admin %}
+  <br> You are a God!
+  {% endif %}
+</div>
 {% endblock %}
