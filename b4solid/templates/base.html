@@ -1,0 +1,35 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>b4solid</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	{% tailwind_css %}
+</head>
+
+<body class="">
+	<header>
+		{% block header %}
+		{% endblock %}
+	</header>
+
+	{% block content %}
+	{% endblock %}
+
+	<footer>
+		{% block footer %}
+		{% endblock %}
+	</footer>
+</body>
+<script>
+	var message_ele = document.querySelector(".message");
+
+	setTimeout(function () {
+		message_ele.remove();
+	}, 1000);
+</script>
+
+</html>
