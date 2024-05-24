@@ -53,6 +53,7 @@ def edit_product(request, id):
 
     product = rq.get('http://aldenluth.fi:8082/products/' + str(id)).json()
     product['id_label'] = f'#{product["id"]:08X}'
+    print(product)
 
     context = {}
     context['product'] = product
