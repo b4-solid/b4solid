@@ -1,7 +1,6 @@
 from django.shortcuts import render
 import requests as rq
 
-# Create your views here.
 def requests(request):
     return render(request, 'requests.html')
 
