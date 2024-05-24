@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import redirect, render
 from django.contrib import messages
-import requests
+import requests as rq
 import hashlib
 
 # Create your views here.
@@ -12,7 +12,7 @@ def login(request):
             "password": hashlib.sha256(request.POST["password"].encode()).hexdigest()
         }
 
-        result = requests.post(
+        result = rq.post(
             url='http://aldenluth.fi:8085/login',
             data=json.dumps(body),
             headers={'Content-Type': 'application/json'}
@@ -22,7 +22,7 @@ def login(request):
         print(result_dict)
         if result_dict["status"] == "success":
             request.session['user'] = result_dict["username"]
-            request.session['godmode'] = result_dict["admin"]
+            request.session['godmode'] = result_dict["admin"] == 'true'
             return redirect('main:main')
         else:
             messages.error(request, result_dict["reason"])
@@ -31,7 +31,7 @@ def login(request):
 def register(request):
     context = {}
     if request.method == 'POST':
-        result = requests.post(
+        result = rq.post(
             url='http://aldenluth.fi:8085/register',
             data=json.dumps(request.POST),
             headers={'Content-Type': 'application/json'}

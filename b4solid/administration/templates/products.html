@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="h-screen flex flex-col items-center p-36">
+  <p class="text-7xl font-bold">Manage Products</p>
+  <div class="flex flex-col items-start mx-10 py-20 w-full space-y-4">
+    <a href="{% url 'main:main' %}" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md">Add Product</a>
+    <div class="rounded-md border-2 border-zinc-200 w-full">
+      <table class="w-full divide-y divide-zinc-200 table-fixed">
+        <thead>
+          <tr>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-28">ID</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-96">Name</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-28">Price</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-84">Description</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-24">Stock</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-96">Image</th>
+            <th scope="col" colspan=2 class="px-6 py-3 text-center font-bold w-36">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr class="border-t-2 ">
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.id_label }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.nama }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.harga }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.deskripsi }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.stok }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.imageLink }}</td>
+            <td class="py-4 whitespace-nowrap text-center text-sm font-medium">
+              <button type="button"
+                class="inline-flex items-center py-2 px-4 text-sm font-bold bg-indigo-600 rounded-md text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
+            </td>
+            <td class="py-4 whitespace-nowrap text-center text-sm font-medium">
+              <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="id" value={{ product.id }}>
+                <button type="submit" class="inline-flex items-center text-sm font-bold text-red-400 rounded-md disabled:opacity-50 disabled:pointer-events-none">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

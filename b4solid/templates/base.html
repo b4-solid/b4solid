@@ -8,20 +8,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	{% tailwind_css %}
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 
 <body class="">
-	<header>
-		{% block header %}
-		{% endblock %}
+	<header class="fixed flex z-10 w-screen justify-center bg-white">
+		{% include 'header.html' %}
 	</header>
 
 	{% block content %}
 	{% endblock %}
 
 	<footer>
-		{% block footer %}
-		{% endblock %}
+		{% include 'footer.html' %}
 	</footer>
 </body>
 <script>

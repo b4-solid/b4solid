@@ -6,7 +6,6 @@ def main(request):
         return redirect('authentication:login')
 
     context = {
-        'user': request.session.get('user'),
-        'admin': request.session.get('godmode') == 'true'
+        'user': request.session.get('user')
     }
     return render(request, 'main.html', context=context)

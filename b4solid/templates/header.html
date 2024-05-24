@@ -1,0 +1,15 @@
+{% if request.session.user != None %}
+<div class="flex justify-between items-center h-20 shadow-md w-full p-10">
+    <a href="{% url 'main:main' %}" class="text-4xl font-bold">B4-solid</a>
+    <div class="flex items-center space-x-8">
+    {% if request.session.godmode %}
+        <a href="{% url 'administration:requests' %}" class="font-bold">Requests</a>
+        <a href="{% url 'administration:products' %}" class="font-bold">Products</a>
+    {% else %}
+        <a href="{% url 'authentication:logout' %}" class="font-bold">Shop</a>
+        <a href="{% url 'authentication:logout' %}" class="font-bold">Request</a>
+    {% endif %}
+        <a href="{% url 'authentication:logout' %}" class="text-red-400">Logout</a>
+    </div>
+</div>
+{% endif %}

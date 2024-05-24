@@ -50,6 +50,10 @@ INSTALLED_APPS = [
 
     'main',
     'authentication',
+    'administration',
+    'cart',
+    'request',
+    'shop',
 
 ]
 
