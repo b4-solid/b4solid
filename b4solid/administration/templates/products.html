@@ -12,12 +12,12 @@
         <thead>
           <tr>
             <th scope="col" class="px-6 py-3 text-start font-bold w-28">ID</th>
-            <th scope="col" class="px-6 py-3 text-start font-bold w-96">Name</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-72">Name</th>
             <th scope="col" class="px-6 py-3 text-start font-bold w-28">Price</th>
             <th scope="col" class="px-6 py-3 text-start font-bold w-84">Description</th>
             <th scope="col" class="px-6 py-3 text-start font-bold w-24">Stock</th>
-            <th scope="col" class="px-6 py-3 text-start font-bold w-96">Image</th>
-            <th scope="col" colspan=2 class="px-6 py-3 text-center font-bold w-36">Action</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-80">Image</th>
+            <th scope="col" colspan=2 class="px-6 py-3 text-center font-bold w-40">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -26,9 +26,9 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.id_label }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.nama }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.harga }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.deskripsi }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis">{{ product.deskripsi }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.stok }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.imageLink }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis text-indigo-600 underline"><a href="{{ product.imageLink }}">{{ product.imageLink }}</a></td>
             <td class="py-4 whitespace-nowrap text-center text-sm font-medium">
               <a href="{% url 'administration:edit_product' product.id %}"
                 class="inline-flex items-center py-2 px-4 text-sm font-bold bg-indigo-600 rounded-md text-white disabled:opacity-50 disabled:pointer-events-none">Edit</a>
