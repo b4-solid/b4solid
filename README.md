@@ -5,7 +5,7 @@
 
 
 2. Future Architecture
-
+![Container Diagram](https://github.com/b4-solid/b4solid/assets/83630284/b1017101-0d37-4d95-9f78-285718a29903)
 
 3. Explanation of risk storming of group
 We didn't do it, last class session only 2 person came, Alden Luthfi and Oey Joshua Jodrian
