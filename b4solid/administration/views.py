@@ -112,7 +112,7 @@ def edit_voucher(request, id):
         else:
             messages.error(request, result.text)
 
-    voucher = rq.get('http://aldenluth.fi8084/vouchers/' + str(id)).json()
+    voucher = rq.get('http://aldenluth.fi:8084/vouchers/' + str(id)).json()
     voucher['id_label'] = f'#{voucher["voucherId"]:08X}'
     print(voucher)
 
