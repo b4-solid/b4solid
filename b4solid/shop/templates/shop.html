@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
+<form method="post">
+{% csrf_token %}
 <div class="h-screen flex flex-col items-center p-36">
   <p class="text-7xl font-bold">Buy Products</p>
-  <form class="grid grid-cols-5 gap-8 py-20 w-full" method="post">
-    {% csrf_token %}
+  <div class="grid grid-cols-5 gap-8 py-20 w-full" method="post">
     {% for product in products %}
     <div class="bg-zinc-50 p-4 rounded-md shadow-lg">
       <img src="{{ product.imageLink }}" alt="{{ product.name }}" class="w-full h-64 object-cover mb-4">
@@ -38,16 +39,17 @@
       </div>
     </div>
     {% endfor %}
-  </form>
+  </div>
 </div>
 <div class="flex justify-center">
   <footer class="bottom-5 fixed h-20 shadow-xl rounded-lg bg-zinc-50 w-1/4">
     <div class="justify-between w-full h-full flex items-center px-6">
       <p class="font-bold">You have {{ orders }} item/s in your cart</p>
-      <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="submit_button">{% csrf_token %}Update Cart</button>
+      <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="submit_button">Update Cart</button>
     </div>
   </footer>
 </div>
+</form>
 <script>
   document.querySelectorAll('[data-hs-input-number-decrement]').forEach(function (decrementButton) {
     decrementButton.addEventListener('click', function () {

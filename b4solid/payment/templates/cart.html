@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block content %}
+<form method="post">
+{% csrf_token %}
 <div class="h-screen flex flex-col items-center py-36 px-96">
   <p class="text-7xl font-bold">Your Orders</p>
   <div class="flex flex-col items-start py-20 w-full space-y-4">
-    <form class="rounded-md border-2 border-zinc-200 w-full" method="post">
-      {% csrf_token %}
+    <div class="rounded-md border-2 border-zinc-200 w-full" method="post">
       <table class="w-full divide-y divide-zinc-200 table-fixed">
         <thead>
           <tr>
@@ -58,18 +59,18 @@
           {% endfor %}
         </tbody>
       </table>
-    </form>
+    </div>
   </div>
 </div>
 <div class="flex justify-center">
   <footer class="bottom-5 fixed h-20 shadow-xl rounded-lg bg-zinc-50 w-auto">
     <div class="justify-between w-full h-full flex items-center px-6 space-x-6">
-      <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="update_button">{% csrf_token %}Update
-        Cart</button>
+      <button type="submit" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="update_button">UpdateCart</button>
       <button class="bg-red-400 text-white font-bold py-2 px-4 rounded-md" id="checkout_button">Checkout</button>
     </div>
   </footer>
 </div>
+</form>
 <script>
   document.querySelectorAll('[data-h-input-number-decrement]').forEach(function (decrementButton) {
     decrementButton.addEventListener('click', function () {
@@ -89,10 +90,6 @@
         input.value = value + 1;
       }
     });
-  });
-
-  $('#update_button').click(function () {
-    $('form').submit()
   });
 </script>
 {% endblock %}
