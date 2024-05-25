@@ -18,14 +18,16 @@ def login(request):
             headers={'Content-Type': 'application/json'}
         )
 
-        result_dict = json.loads(result.text)
-        print(result_dict)
-        if result_dict["status"] == "success":
+        if result.status_code == 200:
+            result_dict = json.loads(result.text)
+
             request.session['user'] = result_dict["username"]
             request.session['godmode'] = result_dict["admin"] == 'true'
+
             return redirect('main:main')
         else:
-            messages.error(request, result_dict["reason"])
+            messages.error(request, result.text)
+
     return render(request, 'login.html')
 
 def register(request):
@@ -37,12 +39,11 @@ def register(request):
             headers={'Content-Type': 'application/json'}
         )
 
-        result_dict = json.loads(result.text)
-        if result_dict["status"] == "success":
+        if result.status_code == 201:
             messages.success(request, "Account created successfully!")
             return redirect('authentication:login')
         else:
-            messages.error(request, result_dict["reason"])
+            messages.error(request, result.text)
 
     return render(request, 'register.html')
 

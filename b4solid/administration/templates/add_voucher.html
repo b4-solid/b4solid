@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="h-screen flex flex-col items-center justify-center">
+  <div class="p-6 shadow-2xl rounded-xl flex flex-col items-center justify-center space-y-6 w-1/4">
+    <div class="text-4xl font-bold">
+      Add Voucher
+    </div>
+    <form method="post" class="flex flex-col w-full space-y-4">
+      {% csrf_token %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <div class="bg-red-400 text-white p-2 rounded-md w-full text-center message">
+            {{ message }}
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+        <div class="flex flex-col space-y-1">
+          <label for="voucherName" class="">Name</label>
+          <input type="text" class="border-zinc-400 border-2 rounded-md bg-zinc-100" name="voucherName" placeholder="A Very Valuable Voucher" required>
+        </div>
+        <div class="flex justify-between">
+          <div class="flex flex-col space-y-1">
+            <label for="discountAmount" class="">Discount Amount</label>
+            <input type="number" class="border-zinc-400 border-2 rounded-md bg-zinc-100" name="discountAmount" placeholder=0 required>
+          </div>
+          <div class="flex flex-col space-y-1">
+            <label for="maxUsage" class="">Max Quota</label>
+            <input type="number" class="border-zinc-400 border-2 rounded-md bg-zinc-100" name="maxUsage" placeholder="No Limit">
+          </div>
+        </div>
+      <button class="bg-indigo-600 p-2 mt-8 rounded-md flex items-center justify-center font-bold text-white" type="submit">Add Voucher</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -4,6 +4,7 @@
     <div class="flex items-center space-x-8">
     {% if request.session.godmode %}
         <a href="{% url 'administration:requests' %}" class="font-bold">Requests</a>
+        <a href="{% url 'administration:vouchers' %}" class="font-bold">Vouchers</a>
         <a href="{% url 'administration:products' %}" class="font-bold">Products</a>
     {% else %}
         <a href="{% url 'authentication:logout' %}" class="font-bold">Shop</a>

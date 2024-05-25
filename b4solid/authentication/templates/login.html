@@ -15,6 +15,10 @@
           <div class="bg-emerald-400 text-white p-2 rounded-md w-full text-center message">
             {{ message }}
           </div>
+          {% elif message.tags == 'error' %}
+          <div class="bg-red-400 text-white p-2 rounded-md w-full text-center message">
+            {{ message }}
+          </div>
           {% endif %}
         {% endfor %}
       {% endif %}
