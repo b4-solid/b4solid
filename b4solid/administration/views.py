@@ -66,9 +66,9 @@ def vouchers(request):
         return redirect('main:main')
 
     if request.method == 'POST':
-        rq.delete('http://127.0.0.1:8084/vouchers/' + request.POST['voucherId'])
+        rq.delete('http://aldenluth.fi:8084/vouchers/' + request.POST['voucherId'])
 
-    vouchers_all = rq.get('http://127.0.0.1:8084/vouchers').json()
+    vouchers_all = rq.get('http://aldenluth.fi:8084/vouchers').json()
 
     context = {}
     context['vouchers'] = vouchers_all
@@ -85,7 +85,7 @@ def add_voucher(request):
 
     if request.method == 'POST':
         result = rq.post(
-            url='http://127.0.0.1:8084/vouchers',
+            url='http://aldenluth.fi:8084/vouchers',
             data=json.dumps(request.POST),
             headers={'Content-Type': 'application/json'}
         )
@@ -103,7 +103,7 @@ def edit_voucher(request, id):
 
     if request.method == 'POST':
         result = rq.put(
-            url='http://127.0.0.1:8084/vouchers/' + str(id),
+            url='http://aldenluth.fi:8084/vouchers/' + str(id),
             data=json.dumps(request.POST),
             headers={'Content-Type': 'application/json'}
         )
@@ -112,7 +112,7 @@ def edit_voucher(request, id):
         else:
             messages.error(request, result.text)
 
-    voucher = rq.get('http://127.0.0.1:8084/vouchers/' + str(id)).json()
+    voucher = rq.get('http://aldenluth.fi8084/vouchers/' + str(id)).json()
     voucher['id_label'] = f'#{voucher["voucherId"]:08X}'
     print(voucher)
 
