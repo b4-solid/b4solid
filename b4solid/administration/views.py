@@ -11,11 +11,11 @@ def requests(request):
     if request.method == 'POST':
         req = rq.get('http://aldenluth.fi:8083/requests/' +
                      request.POST['id']).json()
+        req["currency"] = "IDR"
 
         created_product = {
             "nama": req['name'],
             "harga": req['harga'],
-            "currency": "IDR",
             "deskripsi": req['deskripsi'],
             "stok": 1,
             "imageLink": req['imageLink']
