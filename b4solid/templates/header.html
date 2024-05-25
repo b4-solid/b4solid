@@ -8,7 +8,7 @@
         <a href="{% url 'administration:products' %}" class="font-bold">Products</a>
     {% else %}
         <a href="{% url 'authentication:logout' %}" class="font-bold">Shop</a>
-        <a href="{% url 'authentication:logout' %}" class="font-bold">Request</a>
+        <a href="{% url 'request:user_requests' %}" class="font-bold">Request</a>
     {% endif %}
         <a href="{% url 'authentication:logout' %}" class="text-red-400">Logout</a>
     </div>

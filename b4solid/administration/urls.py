@@ -1,5 +1,12 @@
 from django.urls import path
-from administration.views import requests, products, add_product, edit_product, vouchers, add_voucher, edit_voucher
+from administration.views import (requests,
+                                  products,
+                                  add_product,
+                                  edit_product,
+                                  vouchers,
+                                  add_voucher,
+                                  edit_voucher,
+                                )
 
 app_name = 'administration'
 

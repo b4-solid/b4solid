@@ -11,7 +11,7 @@
       {% csrf_token %}
         <div class="flex flex-col space-y-1">
           <label for="nama" class="">Name</label>
-          <input type="text" class="border-zinc-400 border-2 rounded-md bg-zinc-100" name="nama" value={{ product.nama }} required>
+          <input type="text" class="border-zinc-400 border-2 rounded-md bg-zinc-100" name="nama" value="{{ product.nama }}" required>
         </div>
         <div class="flex justify-between">
           <div class="flex flex-col space-y-1">

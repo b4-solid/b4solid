@@ -26,9 +26,21 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.id_label }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.nama }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.harga }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis">{{ product.deskripsi }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis">
+              {% if product.deskripsi %}
+              {{ product.deskripsi }}
+              {% else %}
+              <span>-</span>
+              {% endif %}
+            </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ product.stok }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis text-indigo-600 underline"><a href="{{ product.imageLink }}">{{ product.imageLink }}</a></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis">
+              {% if product.imageLink %}
+              <a class="text-indigo-600 underline" href="{{ product.imageLink }}">{{ product.imageLink }}</a>
+              {% else %}
+              <span>-</span>
+              {% endif %}
+            </td>
             <td class="py-4 whitespace-nowrap text-center text-sm font-medium">
               <a href="{% url 'administration:edit_product' product.id %}"
                 class="inline-flex items-center py-2 px-4 text-sm font-bold bg-indigo-600 rounded-md text-white disabled:opacity-50 disabled:pointer-events-none">Edit</a>
