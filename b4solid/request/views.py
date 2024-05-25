@@ -5,6 +5,9 @@ import json
 
 # Create your views here.
 def user_requests(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if request.method == 'POST':
         rq.delete('http://aldenluth.fi:8083/requests/' + request.POST['id'])
 
@@ -22,6 +25,9 @@ def user_requests(request):
     return render(request, 'user_requests.html', context=context)
 
 def add_request(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if request.method == 'POST':
         updated_request = request.POST.copy()
         updated_request.update({'username': request.session['user']})
@@ -37,6 +43,9 @@ def add_request(request):
     return render(request, 'add_request.html')
 
 def edit_request(request, id):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if request.method == 'POST':
         updated_request = request.POST.copy()
         updated_request.update({'username': request.session['user']})

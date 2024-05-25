@@ -1,10 +1,10 @@
 import json
-from turtle import up
 from django.shortcuts import redirect, render
 import requests as rq
 
 # Create your views here.
-def shop(request):
+
+def cart(request):
 
     if 'user' not in request.session:
         return redirect('authentication:login')
@@ -20,22 +20,31 @@ def shop(request):
                     'amount': amount
                 }
 
-                rq.post(
+                res = rq.post(
                     url='http://aldenluth.fi:8081/orders',
                     data=json.dumps(updated_order),
                     headers={'Content-Type': 'application/json'}
                 )
 
-        return redirect('shop:shop')
 
-    products_all = rq.get('http://aldenluth.fi:8082/products').json()
+                print(res.text)
+
+        return redirect('payment:cart')
+
     orders_all = rq.get('http://aldenluth.fi:8081/orders/' + request.session['user']).json()
 
     context = {}
-    context['products'] = products_all
-    context['orders'] = sum(x['amount'] for x in orders_all)
+    context['orders'] = orders_all
 
-    for product in products_all:
-        product['id_label'] = f'#{product["id"]:08X}'
+    for order in orders_all:
+        product = rq.get('http://aldenluth.fi:8082/products/' + str(order["productId"])).json()
+        order['product'] = product
+        order['id_label'] = f'#{order["orderId"]:08X}'
+        order['product_label'] = f'#{order["productId"]:08X}'
 
-    return render(request, 'shop.html', context=context)
+    return render(request, 'cart.html', context=context)
+
+def delete_order(request, id):
+    res = rq.delete('http://aldenluth.fi:8081/orders/' + str(id))
+
+    return redirect('payment:cart')

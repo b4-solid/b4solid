@@ -7,7 +7,8 @@
         <a href="{% url 'administration:vouchers' %}" class="font-bold">Vouchers</a>
         <a href="{% url 'administration:products' %}" class="font-bold">Products</a>
     {% else %}
-        <a href="{% url 'authentication:logout' %}" class="font-bold">Shop</a>
+        <a href="{% url 'payment:cart' %}" class="font-bold">Cart</a>
+        <a href="{% url 'shop:shop' %}" class="font-bold">Shop</a>
         <a href="{% url 'request:user_requests' %}" class="font-bold">Request</a>
     {% endif %}
         <a href="{% url 'authentication:logout' %}" class="text-red-400">Logout</a>

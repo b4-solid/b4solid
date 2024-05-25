@@ -31,7 +31,6 @@ def login(request):
     return render(request, 'login.html')
 
 def register(request):
-    context = {}
     if request.method == 'POST':
         result = rq.post(
             url='http://aldenluth.fi:8085/register',

@@ -20,6 +20,8 @@ urlpatterns = [
     path('', include('main.urls')),
     path('', include('authentication.urls')),
     path('', include('administration.urls')),
+    path('', include('shop.urls')),
+    path('', include('payment.urls')),
     path('', include('request.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

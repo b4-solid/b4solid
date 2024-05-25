@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'authentication',
     'administration',
     'request',
-    'order',
+    'payment',
     'shop',
 
 ]

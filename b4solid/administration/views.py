@@ -5,6 +5,9 @@ import requests as rq
 
 
 def requests(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 
@@ -66,6 +69,9 @@ def requests(request):
 
 
 def products(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 
@@ -84,6 +90,9 @@ def products(request):
 
 
 def add_product(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 
@@ -99,6 +108,9 @@ def add_product(request):
 
 
 def edit_product(request, id):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 
@@ -120,6 +132,9 @@ def edit_product(request, id):
 
 
 def vouchers(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 
@@ -139,6 +154,9 @@ def vouchers(request):
 
 
 def add_voucher(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 
@@ -158,6 +176,9 @@ def add_voucher(request):
 
 
 def edit_voucher(request, id):
+    if 'user' not in request.session:
+            return redirect('authentication:login')
+
     if not request.session.get('godmode'):
         return redirect('main:main')
 

@@ -46,7 +46,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis text-indigo-600 underline"><a href="{{ req.storeLink }}">{{ req.storeLink }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden text-ellipsis">
               {% if req.imageLink %}
-              <a class="text-indigo-600 underline" href="{{ product.imageLink }}">{{ req.imageLink }}</a>
+              <a class="text-indigo-600 underline" href="{{ req.imageLink }}">{{ req.imageLink }}</a>
               {% else %}
               <span>-</span>
               {% endif %}

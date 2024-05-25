@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="h-screen flex flex-col items-center p-36">
+  <p class="text-7xl font-bold">Buy Products</p>
+  <form class="grid grid-cols-5 gap-8 py-20 w-full" method="post">
+    {% csrf_token %}
+    {% for product in products %}
+    <div class="bg-zinc-50 p-4 rounded-md shadow-lg">
+      <img src="{{ product.imageLink }}" alt="{{ product.name }}" class="w-full h-64 object-cover mb-4">
+      <h2 class="text-xl font-bold">{{ product.nama }}</h2>
+      <p class="text-zinc-500">{{ product.deskripsi }}</p>
+      <p class="text-zinc-700 font-bold mt-2">{{ product.harga }} IDR</p>
+      <div class="flex justify-center items-end space-x-3">
+        <button type="button"
+          class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-indigo-600 text-white shadow-sm"
+          data-hs-input-number-decrement="">
+          <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+          </svg>
+        </button>
+        <input type="number" name="{{ product.id }}"
+          class="w-20 h-8 border-zinc-400 border-2 rounded-md bg-zinc-100 mt-2 remove-arrow" min=0
+          max="{{ product.stok }}" value="0">
+        <button type="button"
+          class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-indigo-600 text-white shadow-sm"
+          data-hs-input-number-increment="">
+          <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="M12 5v14"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </form>
+</div>
+<div class="flex justify-center">
+  <footer class="bottom-5 fixed h-20 shadow-xl rounded-lg bg-zinc-50 w-1/4">
+    <div class="justify-between w-full h-full flex items-center px-6">
+      <p class="font-bold">You have {{ orders }} item/s in your cart</p>
+      <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="submit_button">{% csrf_token %}Update Cart</button>
+    </div>
+  </footer>
+</div>
+<script>
+  document.querySelectorAll('[data-hs-input-number-decrement]').forEach(function (decrementButton) {
+    decrementButton.addEventListener('click', function () {
+      var input = decrementButton.nextElementSibling;
+      var value = parseInt(input.value, 10);
+      if (value > 0) {
+        input.value = value - 1;
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-hs-input-number-increment]').forEach(function (incrementButton) {
+    incrementButton.addEventListener('click', function () {
+      var input = incrementButton.previousElementSibling;
+      var value = parseInt(input.value, 10);
+      if (value < parseInt(input.max, 10)) {
+        input.value = value + 1;
+      }
+    });
+  });
+
+  $('#submit_button').click(function () {
+    $('form').submit()
+  });
+</script>
+<style>
+  .remove-arrow::-webkit-inner-spin-button,
+  .remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .remove-arrow {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+</style>
+{% endblock %}

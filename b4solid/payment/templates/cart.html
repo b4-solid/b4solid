@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="h-screen flex flex-col items-center py-36 px-96">
+  <p class="text-7xl font-bold">Your Orders</p>
+  <div class="flex flex-col items-start py-20 w-full space-y-4">
+    <form class="rounded-md border-2 border-zinc-200 w-full" method="post">
+      {% csrf_token %}
+      <table class="w-full divide-y divide-zinc-200 table-fixed">
+        <thead>
+          <tr>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-36">ID</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-36">Product ID</th>
+            <th scope="col" colspan=2 class="px-6 py-3 text-start font-bold w-96">Product</th>
+            <th scope="col" class="px-6 py-3 text-start font-bold w-28">Amount</th>
+            <th scope="col" class="px-6 py-3 text-center font-bold"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr class="border-t-2 ">
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ order.id_label }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ order.product_label }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">
+              <img src="{{ order.product.imageLink }}" alt="{{ order.product.name }}" class="w-24 h-full object-cover mb-4">
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ order.product.nama }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm border-0 overflow-hidden">{{ order.amount }}</td>
+            <td class="py-4 whitespace-nowrap text-center text-sm font-medium space-x-3">
+              <div class="flex justify-center items-end space-x-3">
+                <button type="button"
+                  class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-md border border-gray-200 bg-indigo-600 text-white shadow-sm"
+                  data-h-input-number-decrement="">
+                  <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </button>
+                <input type="number" name="{{ order.product.id }}"
+                  class="w-20 h-8 border-zinc-400 border-2 rounded-md bg-zinc-100 mt-2 remove-arrow" min=0
+                  max="{{ order.product.stok }}" value="0">
+                <button type="button"
+                  class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-md border border-gray-200 bg-indigo-600 text-white shadow-sm"
+                  data-h-input-number-increment="">
+                  <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                  </svg>
+                </button>
+                <a href="{% url 'payment:delete_order' order.orderId %}" class="px-4 py-1.5 bg-red-400 rounded-md text-white h-full items-center ">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<div class="flex justify-center">
+  <footer class="bottom-5 fixed h-20 shadow-xl rounded-lg bg-zinc-50 w-auto">
+    <div class="justify-between w-full h-full flex items-center px-6 space-x-6">
+      <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="update_button">{% csrf_token %}Update
+        Cart</button>
+      <button class="bg-red-400 text-white font-bold py-2 px-4 rounded-md" id="checkout_button">Checkout</button>
+    </div>
+  </footer>
+</div>
+<script>
+  document.querySelectorAll('[data-h-input-number-decrement]').forEach(function (decrementButton) {
+    decrementButton.addEventListener('click', function () {
+      var input = decrementButton.nextElementSibling;
+      var value = parseInt(input.value, 10);
+      if (value > 0) {
+        input.value = value - 1;
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-h-input-number-increment]').forEach(function (incrementButton) {
+    incrementButton.addEventListener('click', function () {
+      var input = incrementButton.previousElementSibling;
+      var value = parseInt(input.value, 10);
+      if (value < parseInt(input.max, 10)) {
+        input.value = value + 1;
+      }
+    });
+  });
+
+  $('#update_button').click(function () {
+    $('form').submit()
+  });
+</script>
+{% endblock %}
