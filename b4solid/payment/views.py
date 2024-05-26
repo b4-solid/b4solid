@@ -108,6 +108,7 @@ def checkout(request):
             )
 
             invalid_orders = rq.get('http://aldenluth.fi:8081/orders/product/' + f"{order['product']['id']}/{order['product']['stok']}").json()
+            print(invalid_orders)
             for invalid_order in invalid_orders:
                 rq.delete('http://aldenluth.fi:8081/orders/' + str(invalid_order['orderId']))
 
