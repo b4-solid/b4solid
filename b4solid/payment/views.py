@@ -3,8 +3,6 @@ import json
 from django.shortcuts import redirect, render
 import requests as rq
 
-# Create your views here.
-
 def cart(request):
 
     if 'user' not in request.session:

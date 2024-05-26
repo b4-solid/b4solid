@@ -3,7 +3,6 @@ from django.contrib import messages
 import requests as rq
 import json
 
-# Create your views here.
 def user_requests(request):
     if 'user' not in request.session:
         return redirect('authentication:login')

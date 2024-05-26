@@ -3,7 +3,6 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 import requests as rq
 
-
 def requests(request):
     if 'user' not in request.session:
         return redirect('authentication:login')

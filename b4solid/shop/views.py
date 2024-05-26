@@ -3,7 +3,6 @@ from turtle import up
 from django.shortcuts import redirect, render
 import requests as rq
 
-# Create your views here.
 def shop(request):
 
     if 'user' not in request.session:
