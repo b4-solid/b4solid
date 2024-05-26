@@ -207,18 +207,18 @@ def transactions(request):
 
     if request.method == 'POST':
 
-        transaction = rq.get("http://127.0.0.1:8080/transactions/" + request.POST['transactionId']).json()
+        transaction = rq.get("http://aldenluth.fi:8080/transactions/" + request.POST['transactionId']).json()
         transaction['status'] = request.POST['status']
 
         rq.put(
-            url='http://127.0.0.1:8080/transactions/' + request.POST['transactionId'],
+            url='http://aldenluth.fi:8080/transactions/' + request.POST['transactionId'],
             data=json.dumps(transaction),
             headers={'Content-Type': 'application/json'}
         )
 
     context = {}
 
-    all_transactions = rq.get("http://127.0.0.1:8080/transactions").json()
+    all_transactions = rq.get("http://aldenluth.fi:8080/transactions").json()
     context['transactions'] = all_transactions
 
     for transaction in all_transactions:

@@ -88,7 +88,7 @@ def checkout(request):
             transaction['voucherId'] = int(request.POST['voucher'])
 
         transaction_result = rq.post(
-            url='http://127.0.0.1:8080/transactions',
+            url='http://aldenluth.fi:8080/transactions',
             data=json.dumps(transaction),
             headers={'Content-Type': 'application/json'}
         ).json()
@@ -115,7 +115,7 @@ def checkout(request):
 
         return redirect('payment:checkout')
 
-    all_transactions = rq.get("http://127.0.0.1:8080/transactions/user/" + request.session['user']).json()
+    all_transactions = rq.get("http://aldenluth.fi:8080/transactions/user/" + request.session['user']).json()
     context['transactions'] = all_transactions
 
     for transaction in all_transactions:
