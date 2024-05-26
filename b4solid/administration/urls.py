@@ -1,6 +1,7 @@
 from django.urls import path
 from administration.views import (requests,
                                   products,
+                                  transactions,
                                   add_product,
                                   edit_product,
                                   vouchers,
@@ -14,6 +15,7 @@ urlpatterns = [
     path('requests/', requests, name='requests'),
     path('products/', products, name='products'),
     path('vouchers/', vouchers, name='vouchers'),
+    path('transactions/', transactions, name='transactions'),
     path('add_product/', add_product, name='add_product'),
     path('edit_product/<int:id>/', edit_product, name='edit_product'),
     path('add_voucher/', add_voucher, name='add_voucher'),

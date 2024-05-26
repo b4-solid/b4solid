@@ -6,8 +6,9 @@
         <a href="{% url 'administration:requests' %}" class="font-bold">Requests</a>
         <a href="{% url 'administration:vouchers' %}" class="font-bold">Vouchers</a>
         <a href="{% url 'administration:products' %}" class="font-bold">Products</a>
+        <a href="{% url 'administration:transactions' %}" class="font-bold">Transactions</a>
     {% else %}
-        <a href="{% url 'payment:cart' %}" class="font-bold">Cart</a>
+        <a href="{% url 'payment:checkout' %}" class="font-bold">History</a>
         <a href="{% url 'shop:shop' %}" class="font-bold">Shop</a>
         <a href="{% url 'request:user_requests' %}" class="font-bold">Request</a>
     {% endif %}

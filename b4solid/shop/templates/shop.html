@@ -2,18 +2,17 @@
 {% load static %}
 
 {% block content %}
-<form method="post">
-{% csrf_token %}
 <div class="h-screen flex flex-col items-center p-36">
   <p class="text-7xl font-bold">Buy Products</p>
   <div class="grid grid-cols-5 gap-8 py-20 w-full" method="post">
     {% for product in products %}
-    <div class="bg-zinc-50 p-4 rounded-md shadow-lg">
+    <form class="bg-white p-4 rounded-md shadow-lg flex flex-col" method="post">
+      {% csrf_token %}
       <img src="{{ product.imageLink }}" alt="{{ product.name }}" class="w-full h-64 object-cover mb-4">
       <h2 class="text-xl font-bold">{{ product.nama }}</h2>
       <p class="text-zinc-500">{{ product.deskripsi }}</p>
       <p class="text-zinc-700 font-bold mt-2">{{ product.harga }} IDR</p>
-      <div class="flex justify-center items-end space-x-3">
+      <div class="flex justify-between items-end space-x-3">
         <button type="button"
           class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-indigo-600 text-white shadow-sm"
           data-hs-input-number-decrement="">
@@ -24,7 +23,7 @@
           </svg>
         </button>
         <input type="number" name="{{ product.id }}"
-          class="w-20 h-8 border-zinc-400 border-2 rounded-md bg-zinc-100 mt-2 remove-arrow" min=0
+          class="h-8 flex-grow border-zinc-400 border-2 rounded-md bg-zinc-100 mt-2 remove-arrow" min=0
           max="{{ product.stok }}" value="0">
         <button type="button"
           class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-indigo-600 text-white shadow-sm"
@@ -37,7 +36,8 @@
           </svg>
         </button>
       </div>
-    </div>
+      <button type="submit" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md mt-4">Add to Cart</button>
+    </form>
     {% endfor %}
   </div>
 </div>
@@ -45,7 +45,7 @@
   <footer class="bottom-5 fixed h-20 shadow-xl rounded-lg bg-zinc-50 w-1/4">
     <div class="justify-between w-full h-full flex items-center px-6">
       <p class="font-bold">You have {{ orders }} item/s in your cart</p>
-      <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md" id="submit_button">Update Cart</button>
+      <a href="{% url 'payment:cart'  %}"" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-md">Go to Cart</a>
     </div>
   </footer>
 </div>
@@ -69,10 +69,6 @@
         input.value = value + 1;
       }
     });
-  });
-
-  $('#submit_button').click(function () {
-    $('form').submit()
   });
 </script>
 <style>

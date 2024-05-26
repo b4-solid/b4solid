@@ -43,7 +43,6 @@ def requests(request):
             )
 
         elif request.POST['action'] == 'reject':
-            print(req)
             req['status'] = False
 
             result = rq.put(
@@ -51,8 +50,6 @@ def requests(request):
                 data=json.dumps(req),
                 headers={'Content-Type': 'application/json'}
             )
-
-            print(result.text)
 
     user_requests = rq.get('http://aldenluth.fi:8083/requests')
     user_requests = user_requests.json()
@@ -200,3 +197,32 @@ def edit_voucher(request, id):
     context['voucher'] = voucher
 
     return render(request, 'edit_voucher.html', context=context)
+
+def transactions(request):
+    if 'user' not in request.session:
+        return redirect('authentication:login')
+
+    if not request.session.get('godmode'):
+        return redirect('main:main')
+
+    if request.method == 'POST':
+
+        transaction = rq.get("http://127.0.0.1:8080/transactions/" + request.POST['transactionId']).json()
+        transaction['status'] = request.POST['status']
+
+        rq.put(
+            url='http://127.0.0.1:8080/transactions/' + request.POST['transactionId'],
+            data=json.dumps(transaction),
+            headers={'Content-Type': 'application/json'}
+        )
+
+    context = {}
+
+    all_transactions = rq.get("http://127.0.0.1:8080/transactions").json()
+    context['transactions'] = all_transactions
+
+    for transaction in all_transactions:
+        transaction['id_label'] = f'#{transaction["id"]:08X}'
+        transaction['voucher_label'] = f'#{transaction["voucherId"]:08X}' if transaction["voucherId"] else None
+
+    return render(request, 'transactions_admin.html', context=context)
